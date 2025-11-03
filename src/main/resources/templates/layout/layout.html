@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:fragment="title">[[${pageTitle}]]</title>
+</head>
+<body>
+<header th:replace="layout/header :: header"></header>
+
+<main th:fragment="content">
+    <p>기본 본문입니다.</p>
+</main>
+
+<footer th:replace="layout/footer :: footer"></footer>
+</body>
+</html>

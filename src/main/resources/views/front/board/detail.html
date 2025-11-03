@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<section layout:fragment="content">
+
+  <div class="wrap_board">
+    <div class="wrap_board_table">
+      <form id="board_form" name="board_form" method="post">
+        <input type="hidden" name="reg_no" th:attr="value=${result.data.reg_no}">
+
+        <table class="tbl_board_detail">
+          <tr>
+            <th>제목</th>
+            <td>
+              <span th:text="${result.data.title}">title</span>
+            </td>
+          </tr>
+          <tr>
+            <th>내용</th>
+            <td>
+              <span th:text="${result.data.contents}">contents</span>
+            </td>
+          </tr>
+          <tr>
+            <th>등록일자</th>
+            <td>
+              <span th:text="${#temporals.format(result.data.reg_date, 'yyyy-MM-dd HH:mm')}">RegDate</span>
+            </td>
+          </tr>
+        </table>
+      </form>
+      <div class="wrap_btn_menu text-center">
+        <button type="button" id="btn_modify">수정</button>
+        <button type="button" id="btn_delete">삭제</button>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    $(document).ready(function() {
+      let form = $('#board_form');
+
+      $('#btn_modify').click(function() {
+        form.attr('action', '/board/modify').submit();
+      });
+
+      $('#btn_delete').click(function() {
+        let check = confirm("게시글을 삭제하시겠습니까?");
+
+        if(check) {
+          form.attr('action', '/board/delete').submit();
+        }
+      });
+    });
+  </script>
+</section>
+</html>

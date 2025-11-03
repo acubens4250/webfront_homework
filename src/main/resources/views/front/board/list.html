@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+
+<section layout:fragment="content">
+  <div class="wrap_board">
+    <div class="wrap_board_register">
+      <a href="/board/register">[등록]</a>
+    </div>
+
+    <div class="wrap_board_table">
+      <ul class="tbl_header">
+        <li class="tbl_cell_no">번호</li>
+        <li class="tbl_cell_title">제목</li>
+        <li class="tbl_cell_reg_date">등록일자</li>
+      </ul>
+
+      <ul class="tbl_data" th:each="data : ${result.data_list}">
+        <li class="tbl_cell_no">
+          <span th:text="${data.reg_no}">RegNo</span>
+        </li>
+        <li class="tbl_cell_title">
+          <a href="/board/detail/" th:attrappend="href=${data.reg_no}">
+            <span th:text="${data.title}">Title</span><br>
+          </a>
+        </li>
+        <li class="tbl_cell_reg_date">
+          <span th:text="${#temporals.format(data.reg_date, 'yyyy-MM-dd HH:mm')}">RegDate</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+
+
+</section>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<section layout:fragment="content">
+
+  <div class="wrap_board">
+    <div class="wrap_board_table">
+      <form id="board_form" name="board_form" method="post">
+        <input type="hidden" name="reg_no" th:attr="value=${result.data.reg_no}">
+
+        <table class="tbl_board_modify">
+          <tr>
+            <th>제목</th>
+            <td>
+              <input type="text" id="title" name="title" class="title" th:attr="value=${result.data.title}">
+            </td>
+          </tr>
+          <tr>
+            <th>내용</th>
+            <td>
+              <textarea id="contents" name="contents" style="width:100%;height:200px;" th:text="${result.data.contents}"></textarea>
+            </td>
+          </tr>
+        </table>
+      </form>
+
+      <div class="wrap_btn_menu text-center">
+        <button type="button" id="btn_submit">수정</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script>
+    $(document).ready(function() {
+      let form = $('#board_form');
+
+      $('#btn_submit').click(function() {
+        let title = $("#title").val();
+        let contents = $("#contents").val();
+
+        if ($.trim(title) === "" || title.length == 0) {
+          alert("제목을 입력해주세요.");
+          return;
+        }
+
+        if ($.trim(contents) === "" || contents.length == 0) {
+          alert("내용을 입력해주세요.");
+          return;
+        }
+
+        let check = confirm("게시글을 수정하시겠습니까?");
+
+        if (check) {
+          form.attr('action', '/board/update').submit();
+        }
+      });
+    });
+  </script>
+</section>
+</html>

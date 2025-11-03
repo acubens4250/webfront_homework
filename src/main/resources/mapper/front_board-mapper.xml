@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.ac.mokwon.team_d.front.board.dao.FrontBoardDAO">
+	<select id="selectBoardList" parameterType="Map" resultType="Map">
+		SELECT
+			   reg_no,
+ 			   title,
+			   contents,
+               reg_id,
+               reg_date
+		  FROM board
+		 WHERE del_yn = 'N'
+      ORDER BY reg_no DESC
+	</select>
+
+	<select id="selectOneBoard" parameterType="Map" resultType="Map">
+		SELECT
+			   reg_no,
+ 			   title,
+			   contents,
+               reg_id,
+			   reg_date
+		  FROM board
+		 WHERE del_yn = 'N'
+		   AND reg_no = #{reg_no}
+	</select>
+
+	<insert id="insertBoard" parameterType="Map">
+		INSERT INTO board(title, contents, del_yn, reg_date)
+			 VALUES(#{title}, #{contents}, 'N', NOW())
+	</insert>
+
+	<update id="updateBoard" parameterType="Map">
+		UPDATE board
+		   SET title = #{title},
+		       contents = #{contents}
+		 WHERE reg_no = #{reg_no}
+	</update>
+
+	<update id="deleteBoard" parameterType="Map">
+		UPDATE board
+		   SET del_yn = 'Y'
+		 WHERE reg_no = #{reg_no}
+	</update>
+</mapper>

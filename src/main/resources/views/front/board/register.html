@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<section layout:fragment="content">
+
+  <div class="wrap_board">
+    <div class="wrap_board_table">
+      <form id="board_form" name="board_form" method="post" action="/board/insert">
+        <table class="tbl_board_register">
+          <tr>
+            <th>제목</th>
+            <td>
+              <input type="text" id="title" name="title" class="title" placeholder="제목을 입력해주세요">
+            </td>
+          </tr>
+          <tr>
+            <th>내용</th>
+            <td>
+              <textarea id="contents" name="contents"></textarea>
+            </td>
+          </tr>
+        </table>
+      </form>
+
+      <div class="wrap_btn_menu text-center">
+        <button type="button" id="btn_submit">등록</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script>
+    $(document).ready(function() {
+      let form = $('#board_form');
+      let title = $("#title").val();
+      let contents = $("#contents").val();
+
+      $('#btn_submit').click(function() {
+        title = $("#title").val();
+        contents = $("#contents").val();
+
+        if($.trim(title) === "" || title.length == 0) {
+          alert("제목을 입력해주세요.");
+          return;
+        }
+
+        if($.trim(contents) === "" || contents.length == 0) {
+          alert("내용을 입력해주세요.");
+          return;
+        }
+
+        form.submit();
+      });
+    });
+  </script>
+</section>
+</html>
